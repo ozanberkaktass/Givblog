@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" style="margin-top:25px;">
+    <div class="card mb-3">
+        {% for blog in blogs %}
+            <div class="row">
+                    <div class="col-md-3">
+                        <img  src="{{ blog.image.url }}" alt="" class="img-fluid">  
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'blog_details' blog.slug %}">
+                                    {{ blog.title }}
+                                </a>
+                                    {% for category in categories %}
+                                        {% if category.slug == blog.slug     %}
+                                            <h5 style="color:white; background:#C82333" class="alert"> {{category.name}} | Givblog</h5>
+                                        {% else %}       
+                                        {% endif %}
+                                    {% endfor %}
+                            </h5>
+                            
+                            <p class="card-text">{{ blog.description|striptags|slice:"0:13" }}</p>
+                        </div>
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    a{
+        text-decoration:none;
+    }
+</style>
+{% endblock  %}

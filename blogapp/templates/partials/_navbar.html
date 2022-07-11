@@ -1,0 +1,47 @@
+
+<nav class="navbar bg-danger navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}" style="color:white; font-family:Georgina; font-size:22px;">Givblog</a>
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Anasayfa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blogs' %}">Tüm Blog Yazıları</a>
+            </li>
+             {% for cat in navbar %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog' cat.slug %}">{{cat.name}}</a>
+                </li>
+            {% endfor %}                      
+            <li class="nav-item">
+                <a class="nav-link" href="#contact">İletişim</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+            {% if  user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=>Welcome ,{{username}} </a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<style>
+    .navbar .container .navbar-nav .nav-item .nav-link{
+        color:White;
+    }
+    .navbar .container .navbar-nav .nav-item .nav-link:hover{
+       opacity:80%;
+    }
+</style>

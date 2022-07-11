@@ -1,0 +1,22 @@
+<div class="categories-list list-group">
+    {% for category in categories %}
+       {% if category.slug == selected_category %}
+            <a class="list-group-item list-group-item-action active" href="{% url 'blogs_by_category' category.slug %}">{{ category.name|title }}</a>
+       {% else %}
+            <a class="list-group-item list-group-item-action" href="{% url 'blogs_by_category' category.slug %}">{{ category.name|title }}</a>
+       {% endif %}
+    {% endfor %}
+</div>
+
+
+<style>
+
+.categories-list .list-group-item{
+        transition:0.1s;
+}
+.categories-list .list-group-item:hover{
+    background-color: #C82333;
+    color:white;
+    transition:0.3s;
+}
+</style>

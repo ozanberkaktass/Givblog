@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+{% endblock %}
+{% block extraheads %}
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+{% endblock  %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% endblock  %}
+{% block title%} Homepage{% endblock %}
+{% block content %}
+
+<div class="container mt-4" style="width:75%;">
+    <div class="row">
+        <div class="col-4">
+            <div class="card " style="width: 100%%;">
+                <img class="card-img-top" src="{% static 'img/user.png' %}" alt="Card image cap" style="width:50%; margin:auto; margin-top:5%; border-radius: 50%; background-color:#C82333;">
+                <div class="card-body">
+                  <h5 style="margin-left:25%;" class="card-title">Ozan Berk Aktaş</h5>
+                  <p class="card-text" style="color:gray; margin-left:33%;">Web Geliştirici</p>
+                  <a style="margin-left:27%;"href="https://www.youtube.com/channel/UCsBCNppVjvCt9s0IR2hgljQ" target="_blank" class="btn btn-danger">Youtube Kanalım</a>
+                </div>
+            </div>         
+                <br>
+                    {% include 'partials/_categories.html' %}
+                <br>
+            <div class="card" style="width: 100%; border:0px solid #C82333;">                      
+                <div class="col-12">                                                                                
+                    {% if blog.is_day > 1  %}
+                    <h5 style="font-size:28px; font-family:Georgina; font-weight:bold; opacity: 70%; color:#c82333; margin:auto;"> Günün Yazıları</h5>
+                    {% else %}
+                    <h5 style="font-size:28px; font-family:Georgina; font-weight:bold; opacity: 70%; color:#c82333; margin:auto;"> Günün Yazısı</h5>
+                    {% endif %}
+                    {% for blog in blogs %}                 
+                        {% if blog.is_day %}                                                                             
+                                {% include 'blog/partials/_day.html' %}
+                        {% endif %}
+                    {% endfor %}  
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="card" style="width: 100%; border:1px solid #C82333;" >
+                <ul class="list-group list-group-flush">
+                  <li style="font-size:28px; font-family:Arial; font-weight:bold; opacity: 70%; color:#c82333;"   class="list-group-item "> Yazılım </li>
+                </ul>
+            </div>
+            <hr style="color:#c82333">
+            {% for blog in blogs %}
+                {% if blog.is_home and blog.is_active %}
+                    {% include 'blog/partials/_blog.html' %}
+                {% endif %}
+            {% endfor %} 
+            <div class="w3-content w3-display-container">
+               {% for blog in blogs %}
+                <a href="{% url 'blog_details' blog.slug %}"> <img class="mySlides" src="{{blog.image.url}}" style="width:100%"></a>
+               {% endfor %}
+              <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+              <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+            </div>
+        </div>
+            {% block js_files %}
+                <script>
+                    var slideIndex = 1;
+                    showDivs(slideIndex);
+                    
+                    function plusDivs(n) {
+                    showDivs(slideIndex += n);
+                    }
+                    
+                    function showDivs(n) {
+                    var i;
+                    var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) {slideIndex = 1}
+                    if (n < 1) {slideIndex = x.length}
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";  
+                    }
+                    x[slideIndex-1].style.display = "block";  
+                    }
+                </script>
+            {% endblock js_files %}
+
+
+{% endblock %}
+<script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

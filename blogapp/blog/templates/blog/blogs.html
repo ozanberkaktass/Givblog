@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block title%} Blogs {% endblock %} 
+
+{% block content %}
+
+<div class="container  mt-4" style="width:75%;">
+    <div class="row">     
+        <div class="col-3">
+           <h5 style="font-size:22px; font-family:Arial; font-weight:bold; opacity: 70%; color:#c82333;">Kategoriler</h5>
+                {% include 'partials/_categories.html' %}
+        </div>
+
+        <div class="col-9">
+            {% for category in categories %}
+                {% if category.slug == selected_category %}
+                    <h5 style="color:white; background:#C82333"class="alert"> {{category.name}} | Givblog</h5>
+                {% else %}       
+                {% endif %}
+            {% endfor %}
+            {% if blogs|length > 0 %}
+                {% for blog in blogs %}
+                    {% if blog.is_active %}
+                        {% include 'blog/partials/_blog.html' %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-danger">
+                    Herhangi bir kayıt yok
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

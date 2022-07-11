@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%} Blog Details {% endblock %}
+{% block content %}
+{% if blog.is_day %}
+    <h5 style="margin-left:1%; margin-top:1%; color:#C82333" class="card-title">
+    Günün Yazısı:  {{ blog.title|title }}
+    </h5>
+{% else %}
+<h5 style="margin-left:1%; margin-top:1%; color:#C82333" class="card-title">
+    {{ blog.title|title }}
+    </h5>
+{% endif %}
+<div class="container mt-4" style="width:75%;">
+    <div class="row">
+        <div class="col-12">             
+            <div class="card mb-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-md-12">
+                            <img style="width:70%; margin-left:15%; margin-top:1%;" src="{{ blog.image.url }}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+                    <div class="col-12">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <p class="card-text">{{ blog.description|safe }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+ 
