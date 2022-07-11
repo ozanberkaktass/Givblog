@@ -1,4 +1,4 @@
-# DJANGO - BlogAPp
+# DJANGO - BlogApp
 ## Givblog
 
 Givblog projem django ile yaptığım ilk projem
